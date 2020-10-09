@@ -1,16 +1,18 @@
 export default class Paddle {
-    constructor(GAME_WIDTH, GAME_HEIGHT) {
+    constructor(game) {
+        this.gameWidth = game.gameWidth;
+        this.gameHeight = game.gameHeight;
         this.width = 150;
         this.height = 30;
 
-        this.maxSpeed = 10;
+        this.maxSpeed = 7;
         this.speed = 0;
 
         this.position = {
             //
-            x: GAME_WIDTH / 2 - this.width / 2,
+            x: this.gameWidth / 2 - this.width / 2,
             //game height - this.height would make it flush with bottom. -10 gives it a buffer
-            y: GAME_HEIGHT - this.height - 10,
+            y: this.gameHeight - this.height - 10,
         }
     }
 
@@ -22,13 +24,21 @@ export default class Paddle {
         this.speed = this.maxSpeed;
     }
 
+    stop() {
+        this.speed = 0;
+    }
+
     draw(ctx) {
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 
     update(deltaTime) {
-        if(!deltaTime) return;
         this.position.x += this.speed;
+
+        //keeps them from going over the edge
+        if(this.position.x < 0) this.position.x = 0;
+        if(this.position.x + this.width > this.gameWidth) 
+        this.position.x = this.gameWidth - this.width;
     };
 };
 

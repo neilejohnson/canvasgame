@@ -1,5 +1,4 @@
-import Paddle from './paddle.js'
-import InputHandler from './input.js'
+import Game from './game.js'
 
 //define canvas
 const canvas = document.querySelector('canvas');
@@ -12,11 +11,8 @@ const gameHeight = 600;
 canvas.width = gameWidth;
 canvas.height = gameHeight;
 
-let paddle = new Paddle(gameWidth, gameHeight);
-
-new InputHandler(paddle);
-
-paddle.draw(ctx);
+let game = new Game(gameWidth, gameHeight);
+game.start();
 
 let lastTime = 0;
 
@@ -25,10 +21,10 @@ function gameLoop(timestamp) {
     lastTime = timestamp;
 
     ctx.clearRect(0, 0, gameWidth, gameHeight);
-    paddle.update(deltaTime);
-    paddle.draw(ctx);
+    game.update(deltaTime);
+    game.draw(ctx);
 
     requestAnimationFrame(gameLoop);
 };
 
-gameLoop();
+requestAnimationFrame(gameLoop);
