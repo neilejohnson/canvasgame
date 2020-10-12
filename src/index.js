@@ -12,7 +12,6 @@ canvas.width = gameWidth;
 canvas.height = gameHeight;
 
 let game = new Game(gameWidth, gameHeight);
-game.start();
 
 let lastTime = 0;
 

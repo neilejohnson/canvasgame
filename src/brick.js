@@ -15,7 +15,6 @@ export default class Brick {
     update(deltaTime) {
         if(detectCollision(this.game.ball, this)) {
             this.game.ball.speed.y = -this.game.ball.speed.y;
-            console.log('hit!')
             this.markedForDelection = true;
         }
     }
